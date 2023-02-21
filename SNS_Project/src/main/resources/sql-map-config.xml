@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.ezen.dto.MemberVO" alias="member" />
+		<typeAlias type="com.ezen.dto.FollowVO" alias="follow" />
+		<typeAlias type="com.ezen.dto.CommentVO" alias="comment" />
+		<typeAlias type="com.ezen.dto.BoardVO" alias="board" />
+		<typeAlias type="com.ezen.dto.ShortsVO" alias="shorts" />
+		<typeAlias type="com.ezen.dto.HeartVO" alias="heart" />
+		<typeAlias type="com.ezen.dto.ShortsCommentVO" alias="shortsComment" />
+		<typeAlias type="com.ezen.dto.BookMarkVO" alias="bookMark" />
+		<typeAlias type="com.ezen.dto.ChatVO" alias="chat" />
+		<typeAlias type="com.ezen.dto.ChatRoomVO" alias="chatRoom"/>
+		<typeAlias type="com.ezen.dto.AdminVO" alias="admin"/>
+	</typeAliases>
+
+	<mappers>
+		<mapper resource="mappings/MemberMapper.xml" />
+		<mapper resource="mappings/FollowMapper.xml" />
+		<mapper resource="mappings/CommentMapper.xml" />
+		<mapper resource="mappings/BoardMapper.xml" />
+		<mapper resource="mappings/ShortsMapper.xml" />
+		<mapper resource="mappings/HeartMapper.xml" />
+		<mapper resource="mappings/ShortsCommentMapper.xml" />
+		<mapper resource="mappings/BookMarkMapper.xml" />
+		<mapper resource="mappings/ChatMapper.xml" />
+		<mapper resource="mappings/ChatRoomMapper.xml"/>
+		<mapper resource="mappings/AdminMapper.xml" />
+	</mappers>
+</configuration>

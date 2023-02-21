@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="chatMapper">
+  
+<insert id="insertPrivateChat" parameterType="chat">
+  INSERT INTO chat (chatSeq, id1, id2, text)
+  VALUES (chat_seq.NEXTVAL, #{id1}, #{id2}, #{text})
+</insert>
+
+<insert id="insertRoomChat" parameterType="chat">
+	INSERT INTO chat (chatSeq, chatRoomSeq, id1, text)
+	VALUES (chat_seq.NEXTVAL, #{chatRoomSeq}, #{id1}, #{text})
+</insert>
+
+<delete id="deleteChat" parameterType="chat">
+  DELETE chat WHERE chatSeq = #{chatSeq}
+</delete>
+
+<select id="getPrivateChatList" resultType="chat">
+	SELECT * FROM chat WHERE id1=#{id1} AND id2=#{id2}
+</select>
+
+<select id="getRoomChatList" resultType="chat">
+	SELECT * FROM chat WHERE chatRoomSeq = #{chatRoomSeq}
+</select>
+
+<select id="getChat" resultType="chat">
+	Select * FROM chat WHERE chatSeq = #{chatSeq}
+</select>
+</mapper>
+
+ 
+
+

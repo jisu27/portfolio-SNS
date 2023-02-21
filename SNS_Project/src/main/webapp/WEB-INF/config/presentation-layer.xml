@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<context:component-scan
+		base-package="com.ezen.view"></context:component-scan>
+
+
+	<mvc:annotation-driven></mvc:annotation-driven>
+	<mvc:resources location="file:///c:/shorts/"
+		mapping="/shorts/**"></mvc:resources>
+	<mvc:resources mapping="/images/**" location="/images/" />
+	<mvc:resources mapping="/views/**"
+		location="/WEB-INF/views/" />
+	<mvc:resources mapping="/icon/**" location="/icon/" />
+	<mvc:resources mapping="/profile/**" location="/profile/" />
+	<mvc:resources mapping="/imgs/**" location="/imgs/" />
+	<mvc:resources mapping="/css/**" location="/css/" />
+	<mvc:resources mapping="/js/**" location="/js/" />
+	<mvc:resources location="/adverimages/"
+		mapping="/adverimages/**" />
+	<mvc:resources location="/WEB-INF/views/"
+		mapping="/views/**" />
+
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	<mvc:resources location="/images/" mapping="/images/**"/>
+	<mvc:resources location="/icon/" mapping="/icon/**"/>
+	<mvc:resources location="/profile/" mapping="/profile/**"/>
+	<mvc:resources location="/imgs/" mapping="/imgs/**"/>
+	<mvc:resources location="/css/" mapping="/css/**"/>
+	<mvc:resources location="/js/" mapping="/js/**"/>
+	<mvc:resources location="/shorts/" mapping="/shorts/**"/>
+	
+	<!-- 파일업로드설정 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="-1"></property>
+		<property name="defaultEncoding" value="UTF-8"></property>
+	</bean>
+</beans>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="adminMapper">
+<!-- ##################################################################################### -->	
+	<select id="viewAd" resultType="admin">
+		SELECT * 
+		FROM admin
+		WHERE role =1
+		ORDER BY indate
+	</select>
+<!-- ##################################################################################### -->	
+	<select id="viewAd2" resultType="admin">
+		SELECT * 
+		FROM admin
+		WHERE role =2
+		ORDER BY indate
+	</select>
+	<!-- ##################################################################################### -->
+	<update id="updateAdmin">
+		UPDATE admin 
+		SET role=2 
+		WHERE aSeq=#{aSeq}
+	</update>
+	<!-- ##################################################################################### -->
+	<update id="update-Admin">
+		UPDATE admin 
+		SET role=1 
+		WHERE aSeq=#{aSeq}
+	</update>
+	<!-- ##################################################################################### -->
+	<insert id="insertAd">
+		INSERT INTO admin(aSeq,bSeq,sSeq,id)
+		VALUES (admin_seq.NEXTVAL,#{bSeq},#{sSeq},#{id})
+	</insert>	
+	<!-- ##################################################################################### -->
+	<insert id="deleteAd">
+		DELETE admin WHERE bseq=${bSeq} AND sseq=${sSeq} 
+	</insert>	
+
+</mapper>
+
+ 
+

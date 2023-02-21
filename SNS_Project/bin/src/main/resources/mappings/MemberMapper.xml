@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="memberMapper">
+	<!-- ########################################################################################################################## -->
+	<select id="memberCheck" resultType="member">
+		SELECT
+		id,pwd,name,role,email,pay,profile
+		FROM member
+		WHERE id='${id}'
+	</select>
+	<!-- ########################################################################################################################## -->
+	<insert id="insertMember">
+		INSERT INTO member(id, pwd ,name , email, profile)
+		VALUES (#{id},#{pwd}, #{name}, #{email},#{profile})
+	</insert>
+	<!-- ########################################################################################################################## -->
+	<select id="findId" resultType="member">
+		SELECT id
+		FROM member
+		WHERE
+		name=#{name} AND email=#{email}
+	</select>
+	<!-- ########################################################################################################################## -->
+	<select id="findPwd" resultType="member">
+		SELECT pwd
+		FROM member
+		WHERE
+		name=#{name} AND email=#{email} AND id=#{id}
+	</select>
+	<!-- ########################################################################################################################## -->
+	<select id="recomMember" resultType="String">
+		SELECT id
+		FROM member
+		ORDER BY
+		PAY
+	</select>
+	<!-- ########################################################################################################################## -->
+	<update id="updateMember" >
+		UPDATE member 
+		SET  id=#{id},profile=#{profile},name=#{name},email=#{email},pwd=#{pwd}
+		WHERE id=#{id}
+	</update>
+</mapper>

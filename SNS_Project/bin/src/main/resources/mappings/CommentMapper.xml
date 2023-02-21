@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="commentMapper">
+
+
+	<insert id="insertComment" parameterType="comment">
+		INSERT INTO
+		SNS_COMMENT(cseq, bseq,sseq, id, ccontent)
+		VALUES
+		(sns_comment_seq.NEXTVAL, #{bSeq}, ${sSeq},#{id}, #{ccontent, jdbcType=VARCHAR})
+	</insert>
+
+	<delete id="deleteComment" parameterType="comment">
+		DELETE SNS_COMMENT
+		WHERE cseq=#{cseq}
+	</delete>
+
+	<update id="updateComment" parameterType="comment">
+		UPDATE SNS_COMMENT
+		SET ccontent=#{ccontent, jdbcType=VARCHAR}
+		WHERE cseq=#{cseq}
+	</update>
+
+	<select id="getComment" resultType="comment">
+		SELECT * FROM SNS_COMMENT
+		WHERE cseq=#{cseq}
+	</select>
+
+	<select id="getCommentList" resultType="comment">
+		SELECT *
+		FROM SNS_COMMENT 
+		where bseq = #{bSeq}
+		order by indate DESC
+	</select>
+	
+	<update id="updateCount" parameterType="comment"> 
+        UPDATE SNS_COMMENT
+        SET count=#{count}
+        WHERE cseq=#{cseq} 
+ 	 </update>
+
+</mapper>

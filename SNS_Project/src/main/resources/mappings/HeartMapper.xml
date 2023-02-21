@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="heartMapper">
+
+	<select id="like" resultType="heart">
+		SELECT *
+		FROM heart
+		WHERE id=#{id},bseq=#{bSeq}
+	</select>
+	<!-- ###################################################################################################################### -->
+	<select id="likeBoard" resultType="Integer">
+		SELECT bseq
+		FROM heart
+		WHERE id=#{id} AND cseq=0 AND sseq=0
+	</select>
+	
+	<!-- ###################################################################################################################### -->
+	<select id="likeComment" resultType="Integer">
+		SELECT cseq
+		FROM heart
+		WHERE id=#{id}
+	</select>
+	<!-- ###################################################################################################################### -->
+	<select id="likeShorts" resultType="Integer">
+		SELECT sseq
+		FROM heart
+		WHERE id=#{id} AND bseq=0 ANd cseq=0
+	</select>
+	<!-- ###################################################################################################################### -->
+	<select id="likeCount" resultType="Integer">
+		SELECT count(*)
+		FROM heart h
+		WHERE bseq=#{bSeq} AND cseq=0 AND sseq=0
+	</select>
+	<!-- ###################################################################################################################### -->
+	<select id="likeCommentCount" resultType="Integer">
+		SELECT count(*)
+		FROM heart h
+		WHERE cseq=#{cseq}
+	</select>
+	
+	<select id="likeShortsCount" resultType="Integer">
+		SELECT count(*)
+		FROM heart 
+		WHERE sSeq=#{sSeq} AND cseq=0
+	</select>
+	<!-- ###################################################################################################################### -->
+	<insert id="insertLike">
+		INSERT INTO heart(hseq,bseq,cseq,sseq,id,use_like)
+		VALUES (heart_seq.NEXTVAL,#{bSeq},#{cseq},${sSeq},#{id},#{use_like})
+	</insert>
+	<!-- ###################################################################################################################### -->
+	<delete id="deleteLike">
+		DELETE heart
+		WHERE id=#{id} AND bseq=#{bSeq} AND cseq=0
+	</delete>
+	<!-- ###################################################################################################################### -->
+	<delete id="deleteLike_c">
+		DELETE heart
+		WHERE id=#{id} AND cseq=#{cseq}
+	</delete>
+	<!-- ###################################################################################################################### -->
+	<delete id="deleteLike_s">
+		DELETE heart
+		WHERE id=#{id} AND sseq=#{sSeq} AND cseq=0
+	</delete>
+
+</mapper>
+
+ 
+

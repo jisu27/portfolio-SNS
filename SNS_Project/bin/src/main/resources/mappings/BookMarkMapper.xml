@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="bookMarkMapper">
+  
+<insert id="insertBookMark" parameterType="bookMark">
+  INSERT INTO bookMark (bmSeq, bSeq, sSeq, bmTitle, id)
+  VALUES (bookMark_Seq.NEXTVAL, #{bSeq}, #{sSeq}, #{bmTitle}, #{id})
+</insert>
+
+<insert id="insertBoardBookMark" parameterType="bookMark">
+	INSERT INTO bookMark (bmSeq, bSeq, bmTitle, id)
+	VALUES (bookMark_seq.NEXTVAL, #{bSeq}, #{bmTitle}, #{id})
+</insert>
+
+<insert id="insertShortsBookMark" parameterType="bookMark">
+	INSERT INTO bookMark (bmSeq, sSeq, bmTitle, id)
+	VALUES (bookMark_seq.NEXTVAL, #{sSeq}, #{bmTitle}, #{id})
+</insert>
+<update id="updateBookMark" parameterType="bookMark">
+	UPDATE bookMark SET bmTitle = #{bmTitle} Where bmSeq = #{bmSeq}
+</update>
+
+<delete id="deleteBookMark" parameterType="bookMark">
+  DELETE bookMark WHERE bmSeq = #{bmSeq}
+</delete>
+
+<delete id="deleteBoardBookMark" parameterType="bookMark">
+	DELETE bookMark WHERE bSeq = #{bSeq} AND id = #{id}
+</delete>
+
+<delete id="deleteShortsBookMark" parameterType="bookMark">
+	DELETE bookMark WHERE sSeq = #{sSeq} AND id= #{id}
+</delete>
+
+<select id="getBoardBookMarkList" resultType="bookMark">
+    SELECT b.*, m.bmTitle FROM board b, bookMark m 
+    WHERE m.id=#{id} AND m.bSeq = b.bSeq ORDER BY m.bmSeq DESC
+</select>
+
+<select id="getShortsBookMarkList" resultType="bookMark">
+	SELECT s.*, m.bmTitle FROM shorts s, bookMark m 
+	WHERE m.id=#{id} AND m.sSeq = s.sSeq ORDER BY m.bmSEQ DESC
+</select>
+
+<select id="getBookMarkList" resultType="bookMark">
+	SELECT * FROM bookMark WHERE id=#{id}
+</select>
+
+<select id="getBookMark" resultType="bookMark">
+	Select * FROM bookMark WHERE bmSeq = #{bmSeq}
+</select>
+
+<select id="getBoardBookMarkNums" resultType="Integer">
+	Select bSeq From bookMark WHERE id=#{id} and bSeq != 0
+</select>
+
+<select id="getShortsBookMarkNums" resultType="Integer">
+	Select sSeq From bookMark WHERE id=#{id} and sSeq != 0
+</select>
+
+<select id="getBoardBookMarkTitle" resultType="String">
+	Select m.bmTitle From board b, bookMark m WHERE m.id=#{id} AND b.bSeq = m.bSeq
+</select>
+
+<select id="getShortsBookMarkTitle" resultType="String">
+	Select m.bmTitle From shorts s, bookMark m WHERE m.id=#{id} AND s.sSeq = m.sSeq
+</select>
+
+<select id="getMyBoardList" resultType="bookMark">
+	Select * From board Where id=#{id}
+</select>
+
+</mapper>
+
+ 
+
+

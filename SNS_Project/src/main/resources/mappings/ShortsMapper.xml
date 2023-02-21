@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="ShortsMapper">
+
+	<!-- <insert id = "insertShorts" parameterType = "shorts"> insert into Shorts(sSeq, 
+		sTitle, id, upload) values(shorts_seq.NEXTVAL, #{sTitle}, #{sContent}, #{id}, 
+		#{upload}) </insert> -->
+
+	<insert id="insertShorts" parameterType="shorts">
+		insert into Shorts(sSeq,
+		id, sContent, upload)
+		values(shorts_seq.NEXTVAL, #{id}, #{sContent},
+		#{upload})
+	</insert>
+
+	<!-- <update id = "updateShorts" parameterType = "shorts"> update Shorts 
+		set sTitle=#{sTitle}, id=#{id}, upload=#{upload} where sSeq=#{sSeq} </update> -->
+	<update id="updateShorts" parameterType="shorts">
+		update Shorts set
+		id=#{id}, sContent=#{sContent}, upload=#{upload},sTitle=#{sTitle}
+		where sSeq=#{sSeq}
+	</update>
+	<update id="updateShortsCount" parameterType="shorts">
+		update Shorts set
+		count=#{count}
+		where sSeq=#{sSeq}
+	</update>
+
+	<delete id="deleteShorts" parameterType="shorts">
+		delete shorts where
+		sSeq=#{sSeq}
+
+	</delete>
+
+	<select id="getShorts" resultType="shorts">
+		select * from shorts where
+		sSeq=#{sSeq}
+
+	</select>
+
+	<select id="getShortsList" resultType="shorts">
+		select * 
+		from shorts
+		WHERE scontent LIKE '%'||#{searchKeyword}||'%' AND pay=0
+		ORDER BY sSeq DESC
+	</select>
+	
+	<select id="getAdShortsList" resultType="shorts">
+		select * 
+		from shorts
+		WHERE scontent LIKE '%'||#{searchKeyword}||'%'  AND pay>0
+		ORDER BY sSeq DESC
+	</select>
+	
+	<select id ="getStoryShortsList" resultType="shorts">
+		select *
+		from shorts
+		WHERE scontent LIKE '%'||#{searchKeyword}||'%'
+		ORDER BY sSeq DESC
+	</select>
+	
+	<!-- #################################################################################################################### -->
+	<update id="updatePay" parameterType="shorts">
+		UPDATE shorts
+		SET pay=pay+1
+		WHERE sSeq=#{sSeq}
+	</update>
+	<!-- #################################################################################################################### -->
+	<update id="update-Pay" parameterType="shorts">
+		UPDATE shorts
+		SET pay=pay-1
+		WHERE sSeq=#{sSeq}
+	</update>
+
+</mapper>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="followMapper">
+ 
+ 
+  <insert id="insertFollow" parameterType="follow">
+  		Insert INTO Follow(fSeq, id1, id2)
+  		Values(fSequence.NEXTVAL, #{id1}, #{id2})
+  </insert>
+  
+  <delete id="deleteFollow" parameterType="follow">
+  		Delete Follow
+  		Where id1=#{id1} AND id2=#{id2}
+  </delete>
+ 
+ <select id="getFollow" resultType="follow">
+ 		Select id2 Where fSeq= #{fSeq}
+ </select>
+ 
+ <select id="getFollowList" resultType="String">
+ 		Select id2 
+ 		FROM  follow
+ 		Where id1 =#{id1}
+ </select>
+ <select id="getFollowListId1" resultType="follow">
+ 		Select id1 
+ 		FROM  follow
+ 		Where id2 =#{id2}
+ </select>
+ <select id="countFollow" resultType="int">
+ 		Select count(*) 
+ 		FROM follow 
+ 		WHERE id2='${id2}'
+ </select>
+ <select id="countFollowing" resultType="int">
+ 		Select count(*) 
+ 		FROM follow 
+ 		WHERE id1='${id1}'
+ </select>
+ 
+  <select id="recomFollow" resultType="String">
+ 	 SELECT DISTINCT f.id2
+	 FROM follow f, (SELECT *
+                     FROM follow
+                     WHERE id1=#{id}) a
+	 WHERE a.id2=f.id1 AND NOT a.id2=f.id2
+  </select>
+</mapper>

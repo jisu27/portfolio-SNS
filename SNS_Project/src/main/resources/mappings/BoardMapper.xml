@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="boardMapper">
+  
+  <select id="boardList" resultType="board">
+        SELECT *
+      	FROM board 
+        ORDER BY INDATE DESC
+  </select>
+  
+  <select id="myBoard" resultType="board">
+  	SELECT *
+  	FROM board 
+  	WHERE bSeq=#{bSeq}
+  	ORDER BY INDATE DESC
+  </select>
+
+  <!-- #################################################################################################################### -->
+  <select id="myBoardList" resultType="board">
+  	SELECT * FROM board 
+  	WHERE id=#{id}
+  	AND upload != 'null'
+  	ORDER BY INDATE DESC
+  </select>
+  <!-- #################################################################################################################### -->
+  <insert id="insertBoard" >
+  	INSERT INTO board(bseq,title,id,content,upload,pay) 
+  	VALUES(board_seq.NEXTVAL, #{title}, #{id}, #{content},#{upload}, #{pay})
+  </insert>
+  <!-- #################################################################################################################### -->
+  <update id="updateBoard" parameterType="board"> 
+  		UPDATE board 
+  		SET title=#{title},content=#{content},upload=#{upload}
+  		WHERE bSeq=#{bSeq} 
+  </update>
+  <!-- get 게시물  -->
+  <select id="getBoardList" resultType="board">
+  <![CDATA[
+  	SELECT * 
+  	FROM board
+  	WHERE pay < 2 AND content LIKE '%'||#{keyWord}||'%'
+  	ORDER BY INDATE DESC
+  ]]>
+  </select>
+  <!-- get 광고  -->
+  
+  <select id="getAdverList" resultType="board">
+  <![CDATA[
+  	SELECT * FROM board
+  	WHERE pay = 2 AND content LIKE '%'||#{keyWord}||'%'
+  	ORDER BY INDATE DESC
+  ]]>
+  </select>
+  
+  <delete id="deleteBoard" >
+		DELETE board WHERE bSeq=#{bSeq}
+	</delete>
+	
+	<update id="updateCount" parameterType="board"> 
+        UPDATE board
+        SET count=#{count}
+        WHERE bSeq=#{bSeq} 
+  </update>
+	
+	<select id="boardCount" resultType="Integer">
+	SELECT count(*)
+	FROM board
+	WHERE id=#{id}
+	</select>
+	 <!-- #################################################################################################################### -->
+	  <update id="updatePay" parameterType="board"> 
+	  		UPDATE board 
+	  		SET pay=pay+1
+	  		WHERE bSeq=#{bSeq} 
+	  </update>
+	 <!-- #################################################################################################################### -->
+	  <update id="update-Pay" parameterType="board"> 
+	  		UPDATE board 
+	  		SET pay=pay-1
+	  		WHERE bSeq=#{bSeq} 
+	  </update>
+	
+</mapper>
+
+ 
+
+
