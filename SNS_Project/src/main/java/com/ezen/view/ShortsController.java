@@ -151,10 +151,10 @@ public class ShortsController {
 
 				uploadFile.transferTo(new File("C:/shorts/" + fileName));
 				vo.setUpload(fileName);
-				System.out.println("�뙆�씪�씠由� :" + fileName);
+				
 
 			} else {
-				System.out.println("�뙆�씪�씠 �뾾�뒿�땲�떎");
+				
 				return "insertShorts";
 			}
 
@@ -192,13 +192,17 @@ public class ShortsController {
 		} else {
 			MultipartFile uploadFile = vo.getUploadFile();
 			if (!uploadFile.isEmpty()) {
-	
+				
+				
+				
 				String fileName = uploadFile.getOriginalFilename();
+				
+				String realPath = session.getServletContext()
+						.getRealPath("/shorts/");
 	
-				uploadFile.transferTo(new File("C:/shorts/" + fileName));
+				uploadFile.transferTo(new File(realPath + fileName));
 				vo.setUpload(fileName);
 				
-	
 			} else {
 				
 				return "updatetShorts";
