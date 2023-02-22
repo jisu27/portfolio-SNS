@@ -1,3 +1,18 @@
+create tablespace myts DATAFILE 'd:\OracleDB\myts.dbf' 
+    SIZE 100M AUTOEXTEND on NEXT 5M;
+    
+--사용자 생성 
+-- XE버전에서는 사용자명 앞에 C##이 붙은 사용자만 생성이 가능함. 
+--아래 스크립트 이용시 일반 사용자를 생성 할수 있음 
+ALTER SESSION SET "_ORACLE_SCRIPT" = true;   -- xe버젼만 
+
+CREATE USER project_user IDENTIFIED BY ora123 
+    DEFAULT TABLESPACE myts;
+ 
+      --일반적으로 사용자에게 dba권한을 주지 않음 ;
+    GRANT dba TO project_user;
+    commit
+
 DROP TABLE Admin CASCADE CONSTRAINTS;
 CREATE TABLE Admin(
     aSeq number(8,0) primary key,
