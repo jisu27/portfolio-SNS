@@ -6,7 +6,7 @@
 		SELECT
 		id,pwd,name,role,email,pay,profile
 		FROM member
-		WHERE id='${id}'
+		WHERE id=#{id}
 	</select>
 	<!-- ########################################################################################################################## -->
 	<insert id="insertMember">

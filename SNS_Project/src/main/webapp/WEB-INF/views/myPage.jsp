@@ -140,12 +140,10 @@
 											<a
 												href="deleteFollow.do?id1=${sessionScope.user.id}&id2=${member.id}">언
 												팔로우</a>
-											<a href="#">메시지</a>
 										</c:when>
 										<c:otherwise>
 											<a
 												href="follow.do?id1=${sessionScope.user.id}&id2=${member.id}">팔로우</a>
-											<a href="#">메시지</a>
 										</c:otherwise>
 									</c:choose>
 								</c:otherwise>
